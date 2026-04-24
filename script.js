@@ -68,7 +68,7 @@ function drawCirclePoints(ctx, xc, yc, x, y, color) {
 }
 
 /**
- * 4. Algoritmo del Punto Medio para circunferencias
+ *  Algoritmo del Punto Medio para circunferencias
  */
 function midpointCircle(ctx, xc, yc, radius, color = "#000000") {
     let x = 0;
@@ -103,4 +103,29 @@ function midpointCircle(ctx, xc, yc, radius, color = "#000000") {
  */
 function getPolygonVertices(centerX, centerY, sides, radius) {
     // Desarrollo del estudiante (Uso de Math.sin/Math.cos y retorno de datos)
+    const vertices = [];
+    
+    // El círculo completo tiene 2 * PI radianes. 
+    // Entonces dividimos eso por el número de lados para saber cuánto rotar en cada paso.
+    const angleStep = (2 * Math.PI) / sides;
+
+    // Usamos un bucle para calcular cada punto (x, y)
+    for (let i = 0; i < sides; i++) {
+        // Calculamos el ángulo actual (restamos PI/2 para que el primer punto esté arriba)
+        let currentAngle = (i * angleStep) - (Math.PI / 2);
+        
+        // Fórmulas de conversión de coordenadas polares a cartesianas:
+        // x = centro + radio * cos(ángulo)
+        // y = centro + radio * sin(ángulo)
+        let x = centerX + radius * Math.cos(currentAngle);
+        let y = centerY + radius * Math.sin(currentAngle);
+        
+        // Guardamos el objeto {x, y} en el arreglo, redondeando para el dibujo de píxeles
+        vertices.push({ 
+            x: Math.round(x), 
+            y: Math.round(y) 
+        });
+    }
+    
+    return vertices;
 }
