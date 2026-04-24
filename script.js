@@ -65,6 +65,35 @@ function drawCirclePoints(ctx, xc, yc, x, y, color) {
     drawPixel(ctx, xc + y, yc - x, color);
     drawPixel(ctx, xc - y, yc - x, color);
 
+}
+
+/**
+ * 4. Algoritmo del Punto Medio para circunferencias
+ */
+function midpointCircle(ctx, xc, yc, radius, color = "#000000") {
+    let x = 0;
+    let y = radius;
+    
+    // Parámetro de decisión inicial: p = 5/4 - r (aproximado a 1 - r para enteros)
+    let p = 1 - radius; 
+
+    drawCirclePoints(ctx, xc, yc, x, y, color);
+
+    while (x < y) {
+        x++;
+        // Si p < 0, el punto medio está dentro del círculo, el píxel en Y se mantiene.
+        if (p < 0) {
+            p += 2 * x + 1;
+        } 
+        // Si p >= 0, el punto medio está fuera, debemos reducir Y.
+        else {
+            y--;
+            p += 2 * (x - y) + 1;
+        }
+        drawCirclePoints(ctx, xc, yc, x, y, color);
+    }
+}
+
 /**
  * Calcula los vértices de un polígono regular.
  * @param {number} centerX, centerY - Centro
