@@ -129,3 +129,40 @@ function getPolygonVertices(centerX, centerY, sides, radius) {
     
     return vertices;
 }
+
+/**
+ * Lógica principal ejecutada al cargar la página
+ */
+window.onload = function() {
+    const canvas = document.getElementById("lienzo");
+    const ctx = canvas.getContext("2d");
+
+    // Parámetros principales del lienzo y figura
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const R = 150; // Radio del polígono
+    const rCirculo = Math.floor(R / 4); // Radio de las circunferencias (R/4)
+    
+    // Número aleatorio de lados entre 5 y 10
+    const n = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+    
+    console.log(`Generando polígono de ${n} lados.`);
+
+    // 1. Obtener vértices
+    const vertices = getPolygonVertices(centerX, centerY, n, R);
+
+    // 2. Dibujar líneas del polígono usando Bresenham
+    for (let i = 0; i < vertices.length; i++) {
+        let p1 = vertices[i];
+        // Conectar con el siguiente vértice, y el último con el primero
+        let p2 = vertices[(i + 1) % vertices.length]; 
+        
+        bresenhamLine(ctx, p1.x, p1.y, p2.x, p2.y, "#0000FF"); // Líneas azules
+    }
+
+    // 3. Dibujar las circunferencias en cada vértice
+    for (let i = 0; i < vertices.length; i++) {
+        let v = vertices[i];
+        midpointCircle(ctx, v.x, v.y, rCirculo, "#FF0000"); // Círculos rojos
+    }
+};
