@@ -61,6 +61,8 @@ function bresenhamLine(ctx,x0, y0, x1, y1, color = "#000000") {
  *  Esto va a dibujar los 8 puntos simétricos de una circunferencia
  */
 function drawCirclePoints(ctx, xc, yc, x, y, color) {
+    //Una circunferencia es simétrica: si conocemos un punto, podemos reflejarlo en 8 posiciones diferentes. 
+    //Esto permite dibujar el círculo completo calculando solo una parte y replicándola. 
     drawPixel(ctx, xc + x, yc + y, color);
     drawPixel(ctx, xc - x, yc + y, color);
     drawPixel(ctx, xc + x, yc - y, color);
@@ -75,11 +77,14 @@ function drawCirclePoints(ctx, xc, yc, x, y, color) {
 /**
  *  Algoritmo del Punto Medio para circunferencias
  */
+//Este algoritmo decide en cada paso cuál píxel está más cerca de la forma ideal del círculo. 
+//Funciona evaluando un punto medio entre dos posibles píxeles candidatos. 
 function midpointCircle(ctx, xc, yc, radius, color = "#000000") {
     let x = 0;
     let y = radius;
     
     // Parámetro de decisión inicial: p = 5/4 - r (aproximado a 1 - r para enteros)
+    // p es el parámetro de decisión: indica si el siguiente punto está dentro o fuera del círculo ideal. 
     let p = 1 - radius; 
 
     drawCirclePoints(ctx, xc, yc, x, y, color);
@@ -106,6 +111,8 @@ function midpointCircle(ctx, xc, yc, radius, color = "#000000") {
  * @param {number} radius - Radio
  * @returns {Array} Arreglo de objetos {x, y}
  */
+// Un polígono regular es una figura donde todos los lados y ángulos son iguales. 
+// Para generarlo, se distribuyen puntos equidistantes sobre una circunferencia. 
 function getPolygonVertices(centerX, centerY, sides, radius) {
     // Desarrollo del estudiante (Uso de Math.sin/Math.cos y retorno de datos)
     const vertices = [];
