@@ -1,5 +1,5 @@
 /**
- * Universidad - Facultad de Ingeniería
+ * Universidad Militar Nueva Granada - Facultad de Ingeniería
  * Asignatura: Introducción a la Computación Gráfica
  * * Estudiante: William Felipe Torres Varela
  * * Tarea: Implementar los algoritmos de rasterización manual.
