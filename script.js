@@ -148,10 +148,10 @@ window.onload = function() {
     
     console.log(`Generando polígono de ${n} lados.`);
 
-    // 1. Obtener vértices
+    //Obtener vértices
     const vertices = getPolygonVertices(centerX, centerY, n, R);
 
-    // 2. Dibujar líneas del polígono usando Bresenham
+    //Dibujar líneas del polígono usando Bresenham
     for (let i = 0; i < vertices.length; i++) {
         let p1 = vertices[i];
         // Conectar con el siguiente vértice, y el último con el primero
@@ -160,7 +160,7 @@ window.onload = function() {
         bresenhamLine(ctx, p1.x, p1.y, p2.x, p2.y, "#0000FF"); // Líneas azules
     }
 
-    // 3. Dibujar las circunferencias en cada vértice
+    // Dibujar las circunferencias en cada vértice
     for (let i = 0; i < vertices.length; i++) {
         let v = vertices[i];
         midpointCircle(ctx, v.x, v.y, rCirculo, "#FF0000"); // Círculos rojos
