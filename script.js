@@ -53,6 +53,19 @@ function bresenhamLine(x0, y0, x1, y1, color = "#000000") {
 }
 
 /**
+ *  Esto va a dibujar los 8 puntos simétricos de una circunferencia
+ */
+function drawCirclePoints(ctx, xc, yc, x, y, color) {
+    drawPixel(ctx, xc + x, yc + y, color);
+    drawPixel(ctx, xc - x, yc + y, color);
+    drawPixel(ctx, xc + x, yc - y, color);
+    drawPixel(ctx, xc - x, yc - y, color);
+    drawPixel(ctx, xc + y, yc + x, color);
+    drawPixel(ctx, xc - y, yc + x, color);
+    drawPixel(ctx, xc + y, yc - x, color);
+    drawPixel(ctx, xc - y, yc - x, color);
+
+/**
  * Calcula los vértices de un polígono regular.
  * @param {number} centerX, centerY - Centro
  * @param {number} sides - Número de lados
