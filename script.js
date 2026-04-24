@@ -19,15 +19,18 @@ function drawPixel(ctx, x, y, color = "#000000") {
  */
 function bresenhamLine(ctx,x0, y0, x1, y1, color = "#000000") {
     // Diferencias absolutas para determinar la dirección principal de avance
+    // dx y dy representan la distancia horizontal y vertical entre el punto inicial y final de la línea. 
     let dx = Math.abs(x1 - x0);
     let dy = Math.abs(y1 - y0);
     
     // Direcciones de paso (1 o -1) dependiendo de hacia dónde va la línea
+    //sx y sy indican la dirección en la que se debe avanzar: +1 si va hacia la derecha/abajo, -1 si va hacia la izquierda/arriba. 
     let sx = (x0 < x1) ? 1 : -1;
     let sy = (y0 < y1) ? 1 : -1;
     
     // Parámetro de decisión inicial (error). 
     // Matemáticamente, evalúa la distancia entre la línea ideal y los píxeles reales.
+    //err es el "error acumulado", que mide qué tan lejos estamos de la línea ideal en cada paso.
     let err = dx - dy; 
 
     while (true) {
@@ -40,11 +43,13 @@ function bresenhamLine(ctx,x0, y0, x1, y1, color = "#000000") {
         let e2 = 2 * err;
 
         // Ajuste del error y avance en X (Octantes donde la pendiente es menor a 1)
+        // Si el error indica que estamos más lejos en X, avanzamos horizontalmente.
         if (e2 > -dy) { 
             err -= dy; 
             x0 += sx; 
         }
         // Ajuste del error y avance en Y (Octantes donde la pendiente es mayor a 1)
+        //Si el error indica que estamos más lejos en Y, avanzamos verticalmente.
         if (e2 < dx) { 
             err += dx; 
             y0 += sy; 
